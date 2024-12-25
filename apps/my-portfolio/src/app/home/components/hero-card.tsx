@@ -27,7 +27,9 @@ export function HeroCard() {
               className="relative flex flex-col gap-4 items-center justify-center px-4"
             >
               <div className="text-3xl md:text-2xl font-bold text-black dark:text-white text-center ">
-                Think  Design  Build  Repeat.
+                <span className="text-sky-500 animate-pulse">Think </span>
+                <span className="text-sky-600">Design </span>
+                <span className="text-yellow-700">Build.</span>
               </div>
               {/* <div className="font-extralight text-base md:text-xl dark:text-neutral-200 py-4">
                     .

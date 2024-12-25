@@ -12,7 +12,7 @@ function CodingProfile() {
       </div>
       <div>
         <a
-          className="flex items-center gap-x-4 p-3 hover:bg-primary/10 rounded-lg"
+          className="flex items-center gap-x-4 p-3 hover:bg-yellow-200/30 rounded-lg"
           href="https://leetcode.com/u/jagavara/"
           target="_blank"
         >
@@ -36,25 +36,25 @@ function CodingProfile() {
             ></path>
           </svg>
           <div>
-            <h5 className="font-semibold">Leetcode</h5>
+            <h6 className="font-semibold">Leetcode</h6>
             <p className="text-sm dark:text-[#858585] text-[#717171]">DSA</p>
           </div>
         </a>
         <a
-          className="flex items-center gap-x-4 p-3 hover:bg-primary/10 rounded-lg"
+          className="flex items-center gap-x-4 p-3 hover:bg-yellow-200/30 rounded-lg"
           href="https://bigfrontend.dev/user/jagadish30"
           target="_blank"
         >
           <Image src="/bfe.png" alt="bfe" width="36" height="36" />
           <div>
-            <h5 className="font-semibold">BFD.dev</h5>
+            <h6 className="font-semibold">BFD.dev</h6>
             <p className="text-sm dark:text-[#858585] text-[#717171]">
               Frontend
             </p>
           </div>
         </a>
         <a
-          className="flex items-center gap-x-4 p-3 hover:bg-primary/10 rounded-lg"
+          className="flex items-center gap-x-4 p-3 hover:bg-yellow-200/30 rounded-lg"
           href="https://www.geeksforgeeks.org/user/jagadishvaranasi123/"
           target="_blank"
         >
@@ -71,7 +71,7 @@ function CodingProfile() {
             />
           </svg>
           <div>
-            <h5 className="font-semibold">Geeks for Geeks</h5>
+            <h6 className="font-semibold">Geeks for Geeks</h6>
             <p className="text-sm dark:text-[#858585] text-[#717171]">DSA</p>
           </div>
         </a>

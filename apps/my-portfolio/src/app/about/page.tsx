@@ -2,6 +2,7 @@ import React from "react";
 import Promotion from "../components/promotions";
 import HobbyCard from "../components/hobby-card";
 import WorkExperience from "../components/work-experience";
+import Image from "next/image";
 
 function About() {
   return (
@@ -9,13 +10,22 @@ function About() {
       <div className="grow">
         <div className="max-w-[700px]">
           <section>
-            <h1 className="text-5xl mb-5">
-              {"Hi. I'm "}
-              <span className="inline-flex relative text-yellow-500 before:absolute before:inset-0 before:bg-yellow-200 dark:before:bg-yellow-500 before:opacity-30 before:-z-10 before:-rotate-2 before:translate-y-1/4">
-                {"Jagadish V"}
-              </span>
-              🤟
-            </h1>
+            <div className="flex items-center">
+              <h1 className="text-5xl mb-5">
+                {"Hi. I'm "}
+                <span className="inline-flex relative text-yellow-500 before:absolute before:inset-0 before:bg-yellow-200 dark:before:bg-yellow-500 before:opacity-30 before:-z-10 before:-rotate-2 before:translate-y-1/4">
+                  {"Jagadish V"}
+                </span>
+                🤟
+              </h1>
+              <Image
+                src="/image.jpg"
+                alt="me"
+                width="160"
+                height="160"
+                className="rounded-full shadow-lg"
+              />
+            </div>
             <div className="text-slate-500 dark:text-slate-400 space-y-8 mt-12">
               <div className="space-y-4">
                 <h2 className="text-2xl font-[650] text-slate-800 dark:text-slate-100">
