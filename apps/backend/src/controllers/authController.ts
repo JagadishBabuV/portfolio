@@ -2,6 +2,7 @@ import session from "express-session";
 import { Request, Response } from "express";
 import jwt from "jsonwebtoken";
 import User from "../models/user";
+import { pgPool } from "../app";
 
 // Extend the session type to include userId
 declare module "express-session" {
@@ -16,11 +17,14 @@ const generateToken = (id: number): string => {
   });
 };
 
+
+
+
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { username, password } = req.body;
   try {
     const user = await User.create({ username, password });
-    req.session.userId = user.id; // Store user ID in session
+    // req.session.userId = user.id; // Store user ID in session
     res.status(201).json({
       success: true,
       data: {

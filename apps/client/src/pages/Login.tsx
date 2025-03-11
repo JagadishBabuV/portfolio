@@ -1,21 +1,16 @@
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+
+  const { login } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     try {
-      const response = await axios.post("/api/auth/login", {
-        username,
-        password,
-      });
-      localStorage.setItem("token", response.data.token);
-      navigate("/dashboard");
+      await login(username, password);
     } catch (error) {
       console.error("Login failed", error);
     }

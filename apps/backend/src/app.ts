@@ -12,11 +12,19 @@ import { protect } from "./middleware/authMiddleware";
 import path from "path";
 import crypto from "crypto";
 import fs from "fs";
+import { Pool } from "pg";
 
 dotenv.config();
 
 const app = express();
 const PgSession = connectPgSimple(session);
+
+export const pgPool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false, // You might need this for Supabase
+  },
+});
 
 // Connect to database
 connectDB();
@@ -33,7 +41,7 @@ app.use(cookieParser());
 app.use(
   session({
     store: new PgSession({
-      conString: process.env.DATABASE_URL,
+      pool: pgPool,
       createTableIfMissing: true,
     }),
     secret: process.env.SESSION_SECRET!,

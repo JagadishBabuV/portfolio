@@ -1,42 +1,15 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Dashboard: React.FC = () => {
-  const navigate = useNavigate();
-
-  const handleLogout = async () => {
-    try {
-      // Call the logout API
-      const response = await fetch("/api/auth/logout", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        credentials: "include", // Include cookies in the request
-      });
-
-      if (response.ok) {
-        // Clear user session or authentication tokens here
-        // For example, if using cookies:
-        document.cookie =
-          "session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-
-        // Redirect to login page
-        navigate("/login");
-      } else {
-        console.error("Logout failed");
-      }
-    } catch (error) {
-      console.error("Error during logout:", error);
-    }
-  };
+  const { logout } = useAuth();
 
   return (
     <div className="min-h-screen flex flex-col">
       <header className="flex items-center justify-between p-4 border-b">
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <button
-          onClick={handleLogout}
+          onClick={logout}
           className="py-2 px-4 border rounded-md focus:outline-none focus:ring"
         >
           Logout

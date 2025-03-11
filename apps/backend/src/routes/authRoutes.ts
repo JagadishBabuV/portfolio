@@ -6,11 +6,12 @@ import {
   verifyAuth,
 } from "../controllers/authController";
 import { protect } from "../middleware/authMiddleware";
+import { checkExistingSession } from "../middleware/checkExistingSession";
 
 const router = Router();
 
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", checkExistingSession, register);
+router.post("/login", checkExistingSession, login);
 router.get("/verify", verifyAuth);
 router.post("/logout", protect, logout);
 
