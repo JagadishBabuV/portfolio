@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -18,27 +19,36 @@ const Register: React.FC = () => {
   };
 
   return (
-    <div>
-      <h2>Register</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Username:</label>
-          <input
-            type="text"
-            value={username}
-            onChange={(e) => setUsername(e.target.value)}
-          />
-        </div>
-        <div>
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
+    <div className="flex items-center justify-center min-h-screen bg-white">
+      <div className="w-full max-w-md p-8 border border-black rounded-lg shadow-lg">
+        <h2 className="text-2xl font-bold text-center mb-6">Register</h2>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block mb-2">Username:</label>
+            <input
+              type="text"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+              className="w-full px-3 py-2 border border-black rounded"
+            />
+          </div>
+          <div>
+            <label className="block mb-2">Password:</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="w-full px-3 py-2 border border-black rounded"
+            />
+          </div>
+          <button
+            type="submit"
+            className="w-full py-2 bg-black text-white rounded hover:bg-gray-800"
+          >
+            Register
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
