@@ -1,21 +1,51 @@
-
 import React, { useState } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
+import { useAuth } from "../context/AuthContext";
 
 const Register: React.FC = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-  const navigate = useNavigate();
+  const [passwordRules, setPasswordRules] = useState({
+    minLength: false,
+    hasUpperCase: false,
+    hasLowerCase: false,
+    hasNumber: false,
+    hasSpecialChar: false,
+  });
+  const auth = useAuth();
+
+  const validatePassword = (password: string) => {
+    const minLength = password.length >= 8;
+    const hasUpperCase = /[A-Z]/.test(password);
+    const hasLowerCase = /[a-z]/.test(password);
+    const hasNumber = /[0-9]/.test(password);
+    const hasSpecialChar = /[!@#$%^&*(),.?":{}|<>]/.test(password);
+
+    setPasswordRules({
+      minLength,
+      hasUpperCase,
+      hasLowerCase,
+      hasNumber,
+      hasSpecialChar,
+    });
+
+    return (
+      minLength && hasUpperCase && hasLowerCase && hasNumber && hasSpecialChar
+    );
+  };
+
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newPassword = e.target.value;
+    setPassword(newPassword);
+    validatePassword(newPassword);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await axios.post("/api/auth/register", { username, password });
-      navigate("/login");
-    } catch (error) {
-      console.error("Registration failed", error);
+    if (!validatePassword(password)) {
+      return;
     }
+    auth.register(username, password);
   };
 
   return (
@@ -37,17 +67,64 @@ const Register: React.FC = () => {
             <input
               type="password"
               value={password}
-              onChange={(e) => setPassword(e.target.value)}
+              onChange={handlePasswordChange}
               className="w-full px-3 py-2 border border-black rounded"
             />
+            <ul className="mt-2">
+              <li
+                className={
+                  passwordRules.minLength ? "text-green-500" : "text-red-500"
+                }
+              >
+                Password must be at least 8 characters long.
+              </li>
+              <li
+                className={
+                  passwordRules.hasUpperCase ? "text-green-500" : "text-red-500"
+                }
+              >
+                Password must contain at least one uppercase letter.
+              </li>
+              <li
+                className={
+                  passwordRules.hasLowerCase ? "text-green-500" : "text-red-500"
+                }
+              >
+                Password must contain at least one lowercase letter.
+              </li>
+              <li
+                className={
+                  passwordRules.hasNumber ? "text-green-500" : "text-red-500"
+                }
+              >
+                Password must contain at least one number.
+              </li>
+              <li
+                className={
+                  passwordRules.hasSpecialChar
+                    ? "text-green-500"
+                    : "text-red-500"
+                }
+              >
+                Password must contain at least one special character.
+              </li>
+            </ul>
           </div>
           <button
+            disabled={
+              Object.values(passwordRules).some((val) => !val) || !username
+            }
             type="submit"
-            className="w-full py-2 bg-black text-white rounded hover:bg-gray-800"
+            className="w-full py-2 bg-black text-white rounded hover:bg-gray-800 disabled:opacity-25 disabled:pointer-events-none"
           >
             Register
           </button>
         </form>
+        <div className="w-full flex justify-end">
+          <Link to="/login" className="hover:underline">
+            Login
+          </Link>
+        </div>
       </div>
     </div>
   );

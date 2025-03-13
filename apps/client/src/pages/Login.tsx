@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useAuth } from "../context/AuthContext";
+import { Link } from "react-router-dom";
 
 const Login: React.FC = () => {
   const [username, setUsername] = useState("");
@@ -9,11 +10,7 @@ const Login: React.FC = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    try {
-      await login(username, password);
-    } catch (error) {
-      console.error("Login failed", error);
-    }
+    login(username, password);
   };
 
   return (
@@ -46,6 +43,11 @@ const Login: React.FC = () => {
             Login
           </button>
         </form>
+        <div className="w-full flex justify-end">
+          <Link to="/register" className="hover:underline">
+            Register
+          </Link>
+        </div>
       </div>
     </div>
   );

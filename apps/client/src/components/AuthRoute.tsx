@@ -1,8 +1,8 @@
 import React, { JSX, useEffect, useState } from "react";
 import { Navigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 import { useAuth } from "../context/AuthContext";
+import axios, { AxiosError } from "axios";
 
 const AuthRoute: React.FC<{ children: JSX.Element; requireAuth?: boolean }> = ({
   children,
@@ -14,28 +14,24 @@ const AuthRoute: React.FC<{ children: JSX.Element; requireAuth?: boolean }> = ({
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const response = await fetch("/api/auth/verify", {
-          method: "GET",
-          credentials: "include",
-        });
-
-        if (response.ok) {
-          setIsAuthenticated(true);
-          toast.success("Successfully authenticated!");
-        } else {
-          setIsAuthenticated(false);
-          toast.error(response?.data?.message);
-        }
-      } catch (err: any) {
+        await axios.get("/api/auth/verify");
+        setIsAuthenticated(true);
+      } catch (err) {
         setIsAuthenticated(false);
-        toast.error(err?.message);
+        if (!requireAuth) return;
+        const error = err as Error | AxiosError;
+        if (!axios.isAxiosError(error)) {
+          toast.error("Something went Wrong");
+          return;
+        }
+        toast.error(error.response?.data);
       } finally {
         setLoading(false);
       }
     };
 
     checkAuth();
-  }, []);
+  }, [requireAuth, setIsAuthenticated]);
 
   if (loading) {
     return (

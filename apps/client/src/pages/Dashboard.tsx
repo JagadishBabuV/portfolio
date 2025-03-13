@@ -10,7 +10,7 @@ const Dashboard: React.FC = () => {
         <h1 className="text-2xl font-bold">Dashboard</h1>
         <button
           onClick={logout}
-          className="py-2 px-4 border rounded-md focus:outline-none focus:ring"
+          className="py-2 px-4 border rounded-md focus:outline-none focus:ring cursor-pointer"
         >
           Logout
         </button>

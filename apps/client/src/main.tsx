@@ -9,6 +9,7 @@ import AuthRoute from "./components/AuthRoute";
 import "./index.css";
 import { ToastContainer } from "react-toastify";
 import { AuthProvider } from "./context/AuthContext";
+import "react-toastify/dist/ReactToastify.css";
 
 const container = document.getElementById("root");
 const root = createRoot(container!);
