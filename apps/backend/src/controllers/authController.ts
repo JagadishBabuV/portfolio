@@ -17,9 +17,6 @@ const generateToken = (id: number): string => {
   });
 };
 
-
-
-
 export const register = async (req: Request, res: Response): Promise<void> => {
   const { username, password } = req.body;
   try {
@@ -30,7 +27,6 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       data: {
         id: user.id,
         username: user.username,
-        token: generateToken(user.id),
       },
     });
   } catch (error: any) {
@@ -53,7 +49,6 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       data: {
         id: user.id,
         username: user.username,
-        token: generateToken(user.id),
       },
     });
   } catch (error: any) {
