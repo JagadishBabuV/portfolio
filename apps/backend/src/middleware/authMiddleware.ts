@@ -13,7 +13,6 @@ export const protect = async (
   next: NextFunction
 ): Promise<void> => {
   let token;
-  console.log(req.url, "RURL", req);
   if (req.cookies.token) {
     token = req.cookies.token;
   }

@@ -30,8 +30,6 @@ export const pgPool = new Pool({
 connectDB();
 initModels();
 
-console.log(process.env.DATABASE_URL);
-
 // Disable 'X-Powered-By' header
 app.disable("x-powered-by");
 
