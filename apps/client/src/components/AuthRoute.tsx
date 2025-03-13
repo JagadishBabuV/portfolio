@@ -35,8 +35,8 @@ const AuthRoute: React.FC<{ children: JSX.Element; requireAuth?: boolean }> = ({
 
   if (loading) {
     return (
-      <div className="h-screen w-screen flex items-start justify-between">
-        Loading...
+      <div className="h-screen w-screen flex items-center justify-center text-2xl">
+        Loading...Please wait
       </div>
     );
   }
